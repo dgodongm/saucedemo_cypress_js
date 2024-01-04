@@ -1,3 +1,5 @@
+import { valid_users } from '../fixtures/valid_users.json'
+
 describe('saucedemo login spec', () => {
   beforeEach(() => {
     cy.visit('/')
@@ -7,9 +9,12 @@ describe('saucedemo login spec', () => {
     cy.get('#login_button_container').should('be.visible')
   })
 
-  it('should be able to login with a standard user', () => {
-    cy.login('standard_user', 'secret_sauce')
-    cy.get('.inventory_list').should('be.visible')
+  // generate login tests for each of the valid (that is, those that are allowed to login) canned saucedemo users
+  valid_users.forEach((item) => {
+    it(`Logging in with ${item.username}`, () => {
+      cy.login(item.username, item.password)
+      cy.get('.inventory_list').should('be.visible')
+    })
   })
 
   it('should not be able to login with a locked user', () => {
