@@ -28,45 +28,9 @@ Cypress.Commands.add('getByData', (selector) => {
   return cy.get(`[data-test=${selector}]`)
 })
 
-let userCookie
 Cypress.Commands.add('login', (username, password) => {
   cy.visit('/')
   cy.getByData('username').type(username)
   cy.getByData('password').type(password, { log: false })
   cy.getByData('login-button').click()
-  //   cy.location('pathname').should('equal', '/inventory.html')
-
-  //   if (userCookie) {
-  //     cy.setCookie('session-username', userCookie.value, userCookie)
-  //     cy.visit('/inventory.html')
-  //     cy.location('pathname').should('equal', '/inventory.html')
-  //   } else {
-  //     cy.log('**log in**')
-  //     cy.visit('/')
-  // cy.getByData('username').type(username)
-  // cy.getByData('password').type(password)
-  // cy.getByData('login-button').click()
-  //     cy.location('pathname').should('equal', '/inventory.html')
-  //     cy.getCookie('session-username')
-  //       .should('exist')
-  //       .then((c) => {
-  //         userCookie = c
-  //       })
-  //   }
-  //   cy.session(
-  //     [username, password],
-  //     () => {
-  //       cy.visit('/')
-  //       cy.getByData('username').type(username)
-  //       cy.getByData('password').type(password)
-  //       cy.getByData('login-button').click()
-  //       cy.location('pathname').should('equal', '/inventory.html')
-  //     },
-  //     {
-  //       validate() {
-  //         cy.log('**validate login session**')
-  //         cy.getCookie('session-username').should('exist')
-  //       },
-  //     }
-  //   )
 })
